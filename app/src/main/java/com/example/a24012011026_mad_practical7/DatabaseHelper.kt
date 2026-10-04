@@ -30,9 +30,7 @@ class DatabaseHelper(context: Context) :
     fun insertPerson(person: Person): Long {
 
         val db = writableDatabase
-
         val values = ContentValues()
-
         values.put(PersonDbTableData.COLUMN_ID, person.id)
         values.put(PersonDbTableData.COLUMN_PERSON_NAME, person.name)
         values.put(PersonDbTableData.COLUMN_PERSON_EMAIL_ID, person.emailId)
@@ -46,29 +44,21 @@ class DatabaseHelper(context: Context) :
             null,
             values
         )
-
         db.close()
-
         return result
     }
 
     fun getAllPersons(): ArrayList<Person> {
 
         val personList = ArrayList<Person>()
-
         val db = readableDatabase
-
         val cursor: Cursor = db.rawQuery(
             "SELECT * FROM ${PersonDbTableData.TABLE_NAME}",
             null
         )
-
         if (cursor.moveToFirst()) {
-
             do {
-
                 val person = Person(
-
                     cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -76,39 +66,30 @@ class DatabaseHelper(context: Context) :
                     cursor.getString(4),
                     cursor.getDouble(5),
                     cursor.getDouble(6)
-
                 )
-
                 personList.add(person)
-
             } while (cursor.moveToNext())
         }
-
         cursor.close()
         db.close()
-
         return personList
     }
 
     fun deletePerson(id: String) {
 
         val db = writableDatabase
-
         db.delete(
             PersonDbTableData.TABLE_NAME,
             "${PersonDbTableData.COLUMN_ID}=?",
             arrayOf(id)
         )
-
         db.close()
     }
 
     fun updatePerson(person: Person): Int {
 
         val db = writableDatabase
-
         val values = ContentValues()
-
         values.put(PersonDbTableData.COLUMN_PERSON_NAME, person.name)
         values.put(PersonDbTableData.COLUMN_PERSON_EMAIL_ID, person.emailId)
         values.put(PersonDbTableData.COLUMN_PERSON_PHONE_NO, person.phoneNo)

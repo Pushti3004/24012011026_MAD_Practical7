@@ -28,7 +28,6 @@ class PersonAdapter(
             parent,
             false
         )
-
         return PersonViewHolder(binding)
     }
 
@@ -50,30 +49,18 @@ class PersonAdapter(
         holder.binding.btnDelete.setOnClickListener {
 
             databaseHelper.deletePerson(person.id)
-
             personList.removeAt(position)
-
             notifyItemRemoved(position)
-
-            Toast.makeText(
-                context,
-                "Person Deleted",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast.makeText(context,"Person Deleted",Toast.LENGTH_SHORT).show()
         }
         holder.binding.btnMap.setOnClickListener {
 
-            val intent =
-                Intent(
-                    context,
-                    MapActivity::class.java
-                )
+            val intent = Intent(context,MapActivity::class.java)
 
             intent.putExtra(
                 "Object",
                 person
             )
-
             context.startActivity(intent)
         }
     }

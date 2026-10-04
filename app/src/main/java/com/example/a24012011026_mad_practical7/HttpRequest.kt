@@ -17,41 +17,28 @@ class HttpRequest {
     ):String? {
 
         var response:String? = null
-
         try {
-
             val url = URL(reqUrl)
-
-            val conn =
-                url.openConnection() as HttpURLConnection
-
+            val conn = url.openConnection() as HttpURLConnection
             if(token != null){
-
                 conn.setRequestProperty(
                     "Authorization",
                     "Bearer $token"
                 )
-
                 conn.setRequestProperty(
                     "Content-Type",
                     "application/json"
                 )
             }
-
             conn.requestMethod = "GET"
 
-            response =
-                BufferedInputStream(
-                    conn.inputStream
-                ).bufferedReader().use {
+            response = BufferedInputStream(conn.inputStream).bufferedReader().use{
                     it.readText()
                 }
-
         }
         catch (e:Exception){
             e.printStackTrace()
         }
-
         return response
     }
 }

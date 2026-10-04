@@ -3,9 +3,7 @@ package com.example.a24012011026_mad_practical7
 class PersonDbTableData {
 
     companion object {
-
         const val TABLE_NAME = "persons"
-
         const val COLUMN_ID = "id"
         const val COLUMN_PERSON_NAME = "person_name"
         const val COLUMN_PERSON_EMAIL_ID = "person_email_id"
